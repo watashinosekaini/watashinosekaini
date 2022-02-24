@@ -1,0 +1,197 @@
+<div class="homeHero">
+	<div class="container">
+		<div class="homeHero--body">
+			<p>
+				<strong>Greetings.</strong> ✨ I am a software developer,
+				usually using Elixir, Go, or Ruby, and am passionate about
+				systems thinking and DevOps. I'm based on Canada's west coast in
+				Vancouver, BC. 🇨🇦
+			</p>
+			<p>
+				Currently building ecommerce sites at <a href="https://supergood.software">Super&nbsp;Good</a>,
+				and building some software of my own as <a href="https://www.blackieops.com">BlackieOps</a>.
+			</p>
+		</div>
+
+		<picture>
+			<source srcset="/_/portrait.webp" type="image/webp">
+			<source srcset="/_/portrait.jpg" type="image/jpeg">
+			<img src="/_/portrait.jpg" alt="A photo of Alex Blackie." width="348" height="290">
+		</picture>
+	</div>
+</div>
+
+<div class="container">
+	<div class="homeColumns">
+		<div class="homeColumns--column homeColumns--articles">
+			<h2>Latest Weblog Articles <a href="/feed.xml">$(icon rss)</a></h2>
+
+			<ol class="articleList">
+			$(renderArticles 10 <<-'EOARTICLES'
+				<li class="articleListItem">
+					<a href="/$article/">$title</a>
+					<div>$(formatDate $publishDate)</div>
+				</li>
+EOARTICLES
+)
+			</ol>
+
+			<p>
+				<a href="/articles">More Articles &rarr;</a>
+			</p>
+		</div>
+
+		<div class="homeColumns--column homeColumns--contact">
+			<h2>Find Me Online</h2>
+
+			<div class="contactCards">
+				<a href="mailto:alex@blackie.me" class="contactCard contactCard--email">
+					$(icon send)
+					<div>
+						<div class="contactCard--target">Email</div>
+						<div class="contactCard--name">alex@blackie.me</div>
+					</div>
+				</a>
+
+				<a href="https://github.com/alexblackie" class="contactCard contactCard--github">
+					$(icon github)
+					<div>
+						<div class="contactCard--target">Github</div>
+						<div class="contactCard--name">@alexblackie</div>
+					</div>
+				</a>
+
+				<a href="https://keybase.io/alexblackie" class="contactCard contactCard--keybase">
+					$(icon keybase)
+					<div>
+						<div class="contactCard--target">Keybase</div>
+						<div class="contactCard--name">@alexblackie</div>
+					</div>
+				</a>
+
+				<a href="https://www.linkedin.com/in/alexblackie" class="contactCard contactCard--in">
+					$(icon linkedin)
+					<div>
+						<div class="contactCard--target">LinkedIn</div>
+						<div class="contactCard--name">alexblackie</div>
+					</div>
+				</a>
+
+				<a href="https://www.geoguessr.com/user/6068f859b3a3f6000167afc1" class="contactCard contactCard--geo">
+					$(icon pin)
+					<div>
+						<div class="contactCard--target">GeoGuessr</div>
+						<div class="contactCard--name">alexblackie</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<style>
+:root {
+	--home-sidebar-width: 34%;
+}
+
+.siteHeader { background: transparent }
+
+.homeHero {
+	margin: 0 0 3rem 0;
+	margin-top: calc(var(--height-header)*-1);
+	font-size: 1.15em;
+	background-color: var(--color-bg-light);
+}
+	.homeHero .container {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+	}
+	.homeHero picture {
+		flex-shrink: 0;
+		width: var(--home-sidebar-width);
+		height: auto;
+		line-height: 0;
+	}
+	.homeHero--body {
+		padding: var(--height-header) 2rem 1rem 0;
+	}
+
+
+.articleList {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.articleListItem {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0.5rem 1rem;
+	margin-left: -1rem;
+}
+	.articleListItem:hover {
+		background-color: var(--color-bg-light);
+	}
+
+	.articleListItem > div {
+		flex-shrink: 0;
+		white-space: nowrap;
+		font-size: 0.9rem;
+	}
+
+.contactCard {
+	display: flex;
+	align-items: center;
+	margin: 0;
+	padding: 1rem;
+	color: inherit;
+	text-decoration: none;
+	font-size: 1.15rem;
+}
+	.contactCard:hover {
+		background-color: var(--color-bg-light);
+	}
+
+	.contactCard svg,
+	.contactCard .feather {
+		margin-right: 1rem;
+		width: 1.25rem;
+		height: 1.5rem;
+		color: var(--color-highlight);
+	}
+
+	.contactCard--target {
+		font-size: 0.75em;
+		font-weight: bold;
+		text-transform: uppercase;
+		opacity: 0.75;
+	}
+
+.homeColumns {
+	display: flex;
+	justify-content: space-between;
+}
+	.homeColumns h2 { margin-top: 0; }
+	.homeColumns--articles { width: 64%; }
+	.homeColumns--contact { width: var(--home-sidebar-width); }
+
+@media screen and (max-width: 640px) {
+	.siteHeader {  background-color: var(--color-bg-light) }
+	.siteHeader .container { justify-content: space-around }
+	.siteContent { padding-top: 0 }
+
+	.homeHero { margin: 0 -1rem 2rem }
+	.homeHero .container { flex-direction: column; align-items: center; }
+	.homeHero--body { padding: 1rem; }
+	.homeHero picture { max-width: 50% }
+
+	.homeColumns { display: block; }
+	.homeColumns--column { width: auto; }
+	.homeColumns--column h2 { padding-left: .5rem; }
+	.homeColumns--contact { margin-top: 2rem; }
+
+	.articleListItem { flex-direction: column; margin-bottom: 1rem; text-align: center; }
+}
+</style>
